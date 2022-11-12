@@ -16,12 +16,14 @@ def index(request):
 
 def docIndex(request):
     context = {'segment': 'index'}
-
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
+def blank(request):
+    html_template = loader.get_template('project/blank.html')
+    return HttpResponse(html_template.render({},request))
 
-@login_required(login_url="/login/")
+
 def pages(request):
     context = {}
     # All resource paths end in .html.
