@@ -1,0 +1,47 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Track Products from different websites {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        
+        {% include 'includes/preloader.html' %}
+
+        <!-- Hero -->
+        <section class="section-header">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8">
+                        <div class="mb-3">
+                            <label for="link">Enter link of your product: </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="link" placeholder="Enter link." aria-label="Enter link.">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="platform">Choose E-commerce platform: </label>
+                            <select class="form-control" id="platform" name="platform">
+                                <option value="Amazon" data-image="amazon.webp">Amazon</option>
+                                <option value="Flipkart" data-image="flipkart.png">Flipkart</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="track">Start Tracking</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script src="{{ ASSETS_ROOT }}/js/track.js"></script>
+{% endblock javascripts %}

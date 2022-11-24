@@ -19,10 +19,16 @@ def docIndex(request):
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
-def blank(request):
-    html_template = loader.get_template('project/blank.html')
-    return HttpResponse(html_template.render({},request))
+def project(request):
+    context = {}
+    # All resource paths end in .html.
+    # Pick out the html file name from the url. And load that template.
 
+    load_template = request.path.split('/')[-1]
+    context['segment'] = load_template
+
+    html_template = loader.get_template('project/' + load_template + '.html')
+    return HttpResponse(html_template.render(context, request))
 
 def pages(request):
     context = {}
