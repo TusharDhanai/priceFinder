@@ -25,6 +25,16 @@
                 </div>
             </div>
         </section>
+        <section class="card mx-3 mb-5 p-3 row " >
+            
+            <h4> Suggestions</h4>
+            <div  class="d-flex  p-2 ">
+            {% for x in suggestions %}      
+                {% include 'snippits/product.html' %}
+            {% endfor %}
+            </div>
+
+        </section>
 
     </main>
 
