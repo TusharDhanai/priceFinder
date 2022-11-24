@@ -13,7 +13,7 @@ from django.urls import reverse
 def index(request):
     template = loader.get_template('project/index.html')
     context= {
-        "suggestions": [1,2,3,4,5], 
+        "suggestions": [1,2,3,4,5,6], 
     }
     return HttpResponse(template.render(context,request))
 
