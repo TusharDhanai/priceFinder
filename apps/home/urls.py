@@ -14,6 +14,8 @@ urlpatterns = [
     path('blank', views.project, name='blank'),
     path('track', views.project, name='track'),
     path('tracking', views.project, name='tracking'),
+    path('search', views.search, name='search'),
+    path('insert', views.insertProduct, name='insert'),
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),

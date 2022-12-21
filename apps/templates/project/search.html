@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Blank Page {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        
+        {% include 'includes/preloader.html' %}
+
+        <!-- Hero -->
+        <section class="section-header">
+            <div class="container-fluid">
+                <div class="container text-center px-7">
+                    <h1 class="display-2 mb-3">Online Price Finder</h1>
+                        <form class="mx-5" action="search" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search-bar" name="query" 
+                                value="{{ query.query }}" aria-label="Search" aria-describedby="basic-addon2">
+                                <button type="submit" class="input-group-text" id="search-icon"><span class="fas fa-search"></span></button>
+                            </div>
+                        </form>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-3 border-end">
+                        <h1 class="display-2 mb-3">FILTERS</h1>
+                        <p>Hello world!</p>
+                    </div>
+                    <div class="col-md-9 col-sm-12 border-start">
+                        <h1 class="display-2 mb-3">Products</h1>
+                        {% if products == None %}
+                            <div>
+                                <div class="alert alert-warning" role="alert">
+                                    Search for something. Query is empty.
+                                </div>
+                            </div>
+                        {% else %}
+                            <div>
+                                {% for item in products %}
+                                <div>
+                                    <div class="card shadow flex-row">
+                                        <img src="{{ item.image }}" class="card-img-top rounded-top img-fluid m-2" 
+                                        style="height:280px; width:auto;" alt="{{ item.name }}">
+                                        <div class="card-body">
+                                            <h3 class="h5 card-title mt-3">{{ item.name }}</h3>
+                                            <p class="card-text">{{ item.features }}</p>
+                                            <button href="#" class="btn btn-primary btn-sm">&#8377;{{ item.price }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

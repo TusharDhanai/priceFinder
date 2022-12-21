@@ -8,7 +8,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-
+from django.conf import settings
+from django.db.models import Q
+from apps.home.models import Product
+import os
+import json
+import pandas as pd
 
 def index(request):
     template = loader.get_template('project/index.html')
@@ -56,3 +61,35 @@ def pages(request):
     except:
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
+
+def search(request):
+    request_data = request.POST
+
+
+    if (request_data['query'] != ''):
+        all_objects = Product.objects.values().filter(
+            Q(name__contains=request_data['query']) | Q(category__contains=request_data['query']))[:20]
+
+        context = {
+            "query": request_data.dict(),
+            "products": list(all_objects)
+        }
+    else:
+        context = {
+            "query": '',
+            "products":None
+        }
+
+    html_template = loader.get_template('project/search.html')
+    return HttpResponse(html_template.render(context,request))
+
+def insertProduct(request):
+    product = pd.read_csv(os.path.join(settings.FLIPKART_DIR,"categories/mobile/mobile.csv"))
+    html_template = product.to_json(orient="records")
+
+    data = json.loads(html_template)
+
+    product = Product()
+    product.insert(data,'mobile')
+
+    return HttpResponse(data)
