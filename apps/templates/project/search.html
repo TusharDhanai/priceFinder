@@ -28,7 +28,9 @@
                 <div class="row mt-2">
                     <div class="col-md-3 border-end">
                         <h1 class="display-2 mb-3">FILTERS</h1>
-                        <p>Hello world!</p>
+                        <div>
+                            <p>Not available at the moment.</p>
+                        </div>
                     </div>
                     <div class="col-md-9 col-sm-12 border-start">
                         <h1 class="display-2 mb-3">Products</h1>
@@ -41,14 +43,22 @@
                         {% else %}
                             <div>
                                 {% for item in products %}
-                                <div>
-                                    <div class="card shadow flex-row">
-                                        <img src="{{ item.image }}" class="card-img-top rounded-top img-fluid m-2" 
-                                        style="height:280px; width:auto;" alt="{{ item.name }}">
-                                        <div class="card-body">
-                                            <h3 class="h5 card-title mt-3">{{ item.name }}</h3>
-                                            <p class="card-text">{{ item.features }}</p>
-                                            <button href="#" class="btn btn-primary btn-sm">&#8377;{{ item.price }}</button>
+                                <div class="pb-3">
+                                    <div class="card shadow ps-2">
+                                        <div class="row mt-3">
+                                            <div class="col-md-3 text-center mb-3">
+                                                <a href="https://{{ item.link }}" target="_blank" class="col-md-3">
+                                                    <img src="{{ item.image }}" class="rounded-top card-img-top img-fluid" 
+                                                    style="height:280px;width:auto;object-fit:contain;" alt="{{ item.name }}">
+                                                </a>
+                                            </div>
+                                                <div class="col-md-9">
+                                                <div class="card-body">
+                                                    <a href="https://{{ item.link }}" target="_blank"><h3 class="h5 card-title mt-3">{{ item.name }}</h3></a>
+                                                    <p class="card-text">{{ item.features }}</p>
+                                                    <a href="https://{{ item.link }}" target="_blank" class="btn btn-primary btn-sm">&#8377;{{ item.price }}</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

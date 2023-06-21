@@ -16,9 +16,11 @@ import json
 import pandas as pd
 
 def index(request):
+    suggestions = Product.objects.filter(category__exact='mobile')[:10]
+    
     template = loader.get_template('project/index.html')
     context= {
-        "suggestions": [1,2,3,4,5,6], 
+        "suggestions": list(suggestions)
     }
     return HttpResponse(template.render(context,request))
 
