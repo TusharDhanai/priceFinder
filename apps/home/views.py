@@ -19,8 +19,9 @@ def index(request):
     suggestions = Product.objects.filter(category__exact='mobile')[:10]
     
     template = loader.get_template('project/index.html')
+    suggestions = Product.objects.values().filter(rating__gt=4).order_by("-rating")[:10];
     context= {
-        "suggestions": list(suggestions)
+        "suggestions": list(suggestions), 
     }
     return HttpResponse(template.render(context,request))
 
@@ -84,6 +85,20 @@ def search(request):
 
     html_template = loader.get_template('project/search.html')
     return HttpResponse(html_template.render(context,request))
+
+def product(request, id):
+    html_template = loader.get_template('project/product.html')
+
+    product = Product.objects.values().get(id__exact=id)
+    features = product['features'].strip('[]').replace("'","").split(',')
+
+    context = {
+        'product': product,
+        'features': features,
+        'price': int(product['price'])
+    }
+    return HttpResponse(html_template.render(context, request))
+
 
 def insertProduct(request):
     product = pd.read_csv(os.path.join(settings.FLIPKART_DIR,"categories/mobile/mobile.csv"))

@@ -17,19 +17,15 @@ $(function() {
           if ( item.disabled ) {
             li.addClass( "ui-state-disabled" );
           }
-
-            // $( "<span>", {
-            //     style: item.element.attr( "data-style" ),
-            //     "class": "ui-icon " + item.element.attr( "data-class" )
-            // })
-            $( "<span>", {
-                html:"&emsp;&emsp;",
-                style: `width:50px; height: 24px; top:0.1em; 
-                        background: url('static/assets/img/brand/${item.element.attr('data-image')}') no-repeat;
-                        background-size: 20px;`,   // use style and set background image
-            }).prependTo( wrapper );
-   
-            return li.append( wrapper ).appendTo( ul );
+          
+          $( "<span>", {
+              html:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+              style: `width:50px; height: 24px; top:0.1em; 
+                      background: url('static/assets/img/brand/${item.element.attr('data-image')}') no-repeat;
+                      background-size: 20px;`,   // use style and set background image
+          }).prependTo( wrapper );
+  
+          return li.append( wrapper ).appendTo( ul );
         }
       });
 

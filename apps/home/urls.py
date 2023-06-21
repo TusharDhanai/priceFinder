@@ -15,6 +15,7 @@ urlpatterns = [
     path('track', views.project, name='track'),
     path('tracking', views.project, name='tracking'),
     path('search', views.search, name='search'),
+    path('product/<int:id>',views.product,name='product'),
     path('insert', views.insertProduct, name='insert'),
 
     # Matches any html file
